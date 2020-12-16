@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "dependencies": {
-    "colors": "^1.4.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "moment": "^2.29.1",
-    "morgan": "^1.10.0"
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
   },
   "devDependencies": {
     "mongoose": "^5.11.8",
@@ -20,11 +18,5 @@
     "dev": "nodemon index.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.11.8",
-    "nodemon": "^2.0.6"
-  }
+  "license": "ISC"
 }
