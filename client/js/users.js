@@ -34,9 +34,7 @@ function findUser(user) {
         '<p>'
     );
 
-    $("#get-delete-do").click(()=>
-        
-    });
+    
 
 }
 

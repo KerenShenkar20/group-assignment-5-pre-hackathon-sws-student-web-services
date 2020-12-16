@@ -11,6 +11,14 @@ exports.userDBController = {
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
 
+    getUser(req, res) {
+        console.log("res.User");
+        User.find({ _id: req.params.id })
+            .then(docs => { res.json(docs) })
+            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+
+    },
+
     getUserByJob(req, res){
         User.find({job: req.params.job})            
             .then(docs => {res.json(docs)})
