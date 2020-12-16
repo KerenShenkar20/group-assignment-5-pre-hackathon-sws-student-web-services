@@ -10,7 +10,7 @@ const userSchema = new Schema({
     avatar: { type: String, required: true},
     color: { type: String, required: true},
     job: { type: String, required: true},
-}, { collection: 'Users', strict: false });
+}, { collection: 'users'});
 
 
 const User = model('User', userSchema);
