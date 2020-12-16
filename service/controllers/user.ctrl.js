@@ -1,4 +1,6 @@
+const { query } = require('express');
 const User = require('../Models/users');
+
 
 exports.userDBController = {
 
