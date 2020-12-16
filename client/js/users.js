@@ -33,30 +33,27 @@ function updateUserById(userId) {
 }
 
 function findUser(user) {
-    console.log(user);
+    console.log(user.gender);
     $("#user-result").empty();
     $("#user-result").append(
-        `First Name:<input type="text" placeholder="${user.first_name}" id="firstName">`+
-        '<button type="button" id="updateFisrtName">Enter</button>' +
-        `Last Name<input type="text" placeholder="${user.last_name}">` +
-        '<input type="submit" value="update Last Name" id="updateLastName">' +
-        `Email<input type="text" placeholder="${user.email}">` +
-        '<input type="submit" value="update Email" id="updateEmail">' +
-        `Gender<input type="text" placeholder="${user.gender}">` +
-        '<input type="submit" value="update Gender" id="updateGender">'
+        `First Name <input type="text" placeholder="${user.first_name}" id="firstName">` +
+        '<button type="button" class="btn-danger" id="updateFisrtName">Enter</button><br>' +
+        `Last Name <input type="text" placeholder="${user.last_name}">` +
+        '<button type="button" class="btn-danger" id="updateLastName">Enter</button><br>' +
+        `Email <input type="text" placeholder="${user.email}">` +
+        '<button type="button" class="btn-danger" id="updateEmail">Enter</button><br>' +
+        `Gender <input type="text" placeholder="${user.gender}">` +
+        '<button type="button" class="btn-danger" id="updateGender">Enter</button><br>'
     );
 
-    $("#updateFisrtName").click(() => {
-        const firstName = $("firstName").val();
-        console.log(firstName);
-
-        //updateUserById(firstName);
+    $(document).ready(() => {
+        $("#updateFisrtName").click(() => {
+            const firstName = document.getElementById("firstName").value;
+            console.log("caught the right button and reutned: ", firstName);
+        });
+        //updateUserById(user);
     });
 
-    // $("#updateFisrtName").click(() => {
-    //     console.log(user.first_name);
-    //     updateUserById(user);
-    // });
 
 }
 
@@ -81,6 +78,7 @@ function recreateUsersTable(users) {
     let tr = table.insertRow(-1);                   // TABLE ROW.
 
     for (let i = 0; i < col.length; i++) {
+
         if (i == 6)
             continue;
         let th = document.createElement("th");      // TABLE HEADER.
@@ -92,19 +90,18 @@ function recreateUsersTable(users) {
     for (let i = 0; i < users.length; i++) {
 
         tr = table.insertRow(-1);
-        tr.style.color = users[i][col[6]];
+        tr.style.color = users[i][col[7]];
         for (let j = 0; j < col.length; j++) {
 
-            if (j == 6)
+            if (j == 5)
                 continue;
 
             let tabCell = tr.insertCell(-1);
-            if (j == 5) {
+            if (j == 6) {
 
                 tabCell.style.backgroundImage = `url(${users[i][col[j]]})`
                 continue;
             }
-
 
             tabCell.innerHTML = users[i][col[j]];
         }
@@ -123,14 +120,19 @@ function userOperationsListeners() {
     });
 
     $("#get-delete-do").click(() => {
-            const userId = $("#user-id").val();
-            console.log(userId);
+        const userId = $("#user-id").val();
+        console.log(userId);
 
-            getUserById(userId);
+        getUserById(userId);
     });
 
     $("#show-button").click(() => {
         getAllUsers();
+    });
+
+
+    $("#Hide-button").click(() => {
+        $("table").hide();
     });
 
 }
