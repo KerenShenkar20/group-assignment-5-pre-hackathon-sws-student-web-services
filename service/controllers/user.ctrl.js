@@ -39,12 +39,10 @@ exports.userDBController = {
     },
 
     updatUser(req, res) {
-
         const info = req.body
-        User.updateOne({ id: req.params.id }, info)
+        User.updateOne({ id: parseInt(req.params.id) }, info)
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
-
     },
 
     deleteUser(req, res) {
