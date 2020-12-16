@@ -12,7 +12,11 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+td{
+    height: 45px;
+    width:20px;
 
+}
 #wrapper h1 {
     text-align: center;
 }
