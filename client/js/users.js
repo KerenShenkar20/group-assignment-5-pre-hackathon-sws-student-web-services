@@ -22,6 +22,7 @@ function getUserById(userId) {
 }
 
 function findUser(user) {
+    console.log(user);
     $("#user-result").empty();
     $("#user-result").append(
         '<p>' +
