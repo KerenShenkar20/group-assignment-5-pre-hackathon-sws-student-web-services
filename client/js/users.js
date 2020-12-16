@@ -21,17 +21,42 @@ function getUserById(userId) {
     });
 }
 
+function updateUserById(userId) {
+    console.log(userId);
+    $.ajax({
+        url: `http://localhost:3000/api/users/${userId}`,
+        type: 'PUT',
+        success: function (user) {
+            findUser(user);
+        }
+    });
+}
+
 function findUser(user) {
     console.log(user);
     $("#user-result").empty();
     $("#user-result").append(
-        '<p>' +
-        'Name: ' + user.first_name + '<br>' +
-        'Longitude: ' + user.last_name + '<br>' +
-        'Latitude: ' + user.email + '<br>' +
-        'Stars: ' + user.gender + '<br>' +
-        '<p>'
+        `First Name:<input type="text" placeholder="${user.first_name}" id="firstName">`+
+        '<button type="button" id="updateFisrtName">Enter</button>' +
+        `Last Name<input type="text" placeholder="${user.last_name}">` +
+        '<input type="submit" value="update Last Name" id="updateLastName">' +
+        `Email<input type="text" placeholder="${user.email}">` +
+        '<input type="submit" value="update Email" id="updateEmail">' +
+        `Gender<input type="text" placeholder="${user.gender}">` +
+        '<input type="submit" value="update Gender" id="updateGender">'
     );
+
+    $("#updateFisrtName").click(() => {
+        const firstName = $("firstName").val();
+        console.log(firstName);
+
+        //updateUserById(firstName);
+    });
+
+    // $("#updateFisrtName").click(() => {
+    //     console.log(user.first_name);
+    //     updateUserById(user);
+    // });
 
 }
 
@@ -107,6 +132,7 @@ function userOperationsListeners() {
     $("#show-button").click(() => {
         getAllUsers();
     });
+
 }
 
 
