@@ -1,4 +1,6 @@
+const { query } = require('express');
 const User = require('../Models/users');
+
 
 const userID = 500;
 exports.userDBController = {
@@ -44,7 +46,7 @@ exports.userDBController = {
             "first_name": req.body.first_name,
             "last_name": req.body.last_name,
             "email": req.body.email,
-            "gender":req.body.gender,
+            "gender": req.body.gender,
             "avatar": req.body.avatar,
             "color":req.body.color,
             "job":req.body.job 
