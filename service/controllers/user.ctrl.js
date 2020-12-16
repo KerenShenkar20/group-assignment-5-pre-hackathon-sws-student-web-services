@@ -1,10 +1,9 @@
-const { default: Axios } = require('axios');
 const User = require('../Models/users');
 
 exports.userDBController = {
 
     getUsers(req, res){                
-        User.find({})         // GET all users
+        User.find({})         
             .then(docs => {res.json(docs)})
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
