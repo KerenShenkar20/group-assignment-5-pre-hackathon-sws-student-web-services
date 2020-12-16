@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header, main, footer, nav, aside, section, div  {
+    display: block;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+ 
+#wrapper h1 {
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    margin-left: 43%;
+    margin-top: 10%;
+}
