@@ -1,6 +1,6 @@
 //$(function () {
- //   getAllUsers();
-    userOperationsListeners();
+//   getAllUsers();
+userOperationsListeners();
 //});
 
 function getAllUsers() {
@@ -63,6 +63,8 @@ function recreateUsersTable(users) {
     let tr = table.insertRow(-1);                   // TABLE ROW.
 
     for (let i = 0; i < col.length; i++) {
+        if (i == 6)
+            continue;
         let th = document.createElement("th");      // TABLE HEADER.
         th.innerHTML = col[i];
         tr.appendChild(th);
@@ -72,9 +74,20 @@ function recreateUsersTable(users) {
     for (let i = 0; i < users.length; i++) {
 
         tr = table.insertRow(-1);
-
+        tr.style.color = users[i][col[6]];
         for (let j = 0; j < col.length; j++) {
+
+            if (j == 6)
+                continue;
+
             let tabCell = tr.insertCell(-1);
+            if (j == 5) {
+                
+                tabCell.style.backgroundImage = `url(${users[i][col[j]]})`
+                continue;
+            }
+
+
             tabCell.innerHTML = users[i][col[j]];
         }
     }
@@ -99,6 +112,9 @@ function userOperationsListeners() {
         } else {
             // Delete
         }
+    }
+function $("#show-button").click(() => {
+        getAllUsers();
     });
 }
 
