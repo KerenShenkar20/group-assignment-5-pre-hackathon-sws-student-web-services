@@ -3,7 +3,7 @@ const{ userDBController} = require('../controllers/user.ctrl');
 
 const userRouter = new Router();  
 
-userRouter.get('/',userDBController.getUsers);
+userRouter.get('/', userDBController.getUsers);
 userRouter.get('/:id', userDBController.getUser)
 userRouter.post('/', userDBController.addUser);
 userRouter.put('/:id', userDBController.updatUser);
