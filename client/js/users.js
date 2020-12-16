@@ -13,6 +13,36 @@ function getAllUsers() {
     });
 }
 
+function getUserById() {
+    $.ajax({
+        url: `http://localhost:3000/api/users${userId}`,
+        type: 'GET',
+        success: function (user) {
+            findUser(user);
+        }
+    });
+}
+
+function findUser(user) {
+    $("#user-result").empty();
+    $("#user-result").append(
+        '<p>' +
+        'Name: ' + user.first_name + '<br>' +
+        'Longitude: '  + user.last_name + '<br>' +
+        'Latitude: ' + user.email + '<br>' +
+        'Stars: ' + user.gender + '<br>' +
+        '<p>'
+    );
+
+    $("#get-delete-do").click(()=>
+        
+    });
+
+}
+
+
+
+
 function recreateUsersTable(users) {
 
     // EXTRACT VALUE FOR HTML HEADER. 
@@ -54,21 +84,31 @@ function recreateUsersTable(users) {
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
 }
-/*
-function recreateUsersTable(users) {
-    $("table").empty().remove();
-    
-    users.forEach(element => {
-        $('#userTable > tbody:last-child').append(`<tr>${element}</tr>`);
-    });
-}*/
 
 function userOperationsListeners() {
-    $("#show-button").click(() => {
-        console.log("hey");
-        getAllUsers();
+    $("#update-button").click(() => {
+        $("#get-delete-user").css("display", "block");
+        $("#get-delete-do").text("Get");
+    });
+
+    $("#get-delete-do").click(() => {
+        if ($("#get-delete-do").text() === "Update user") {
+            const userId = $("#user-id").val();
+
+            getUserById(userId);
+        } else {
+            // Delete
+        }
     });
 }
+
+
+// function userOperationsListeners() {
+//     $("#update-button").click(() => {
+//         console.log("hey");
+//         getAllUsers();
+//     });
+// }
 // function userOperationsListeners() {
 
 //     $("#get-button").click(() => {
