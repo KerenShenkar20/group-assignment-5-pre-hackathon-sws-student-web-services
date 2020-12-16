@@ -1,33 +1,35 @@
-$(function() {
-    //getAllUsers();
+//$(function () {
+ //   getAllUsers();
     userOperationsListeners();
-});
+//});
 
-// function getAllUsers() {
-//     $.ajax({
-//         url: 'http://localhost:3000/api/restaurants',
-//         type: 'GET',
-//         success: function(users) {
-//             recreateUsersTable(users);
-//         }
-//     });
-// }
+function getAllUsers() {
+    $.ajax({
+        url: 'http://localhost:3000/api/users',
+        type: 'GET',
+        success: function (users) {
+            console.log(users);
+            recreateUsersTable(users);
+        }
+    });
+}
+
 function recreateUsersTable(users) {
     $("table").empty().remove();
 
-    // Continue
     users.array.forEach(element => {
         $('#userTable > tbody:last-child').append(`<tr>${element}</tr>`);
-    });    
+    });
 }
 
-function userOperationsListeners(){
+function userOperationsListeners() {
     $("#show-button").click(() => {
-        console.log("HO");
+        
+        getAllUsers();
     });
 }
 // function userOperationsListeners() {
- 
+
 //     $("#get-button").click(() => {
 //         $("#get-delete-restaurant").css("display", "none");
 //         alert("Add");
