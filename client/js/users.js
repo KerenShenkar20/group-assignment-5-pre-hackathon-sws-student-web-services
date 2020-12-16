@@ -1,7 +1,5 @@
-//$(function () {
-//   getAllUsers();
+
 userOperationsListeners();
-//});
 
 function getAllUsers() {
     $.ajax({
@@ -13,9 +11,9 @@ function getAllUsers() {
     });
 }
 
-function getUserById() {
+function getUserById(userId) {
     $.ajax({
-        url: `http://localhost:3000/api/users${userId}`,
+        url: `http://localhost:3000/api/users/${userId}`,
         type: 'GET',
         success: function (user) {
             findUser(user);
@@ -28,17 +26,13 @@ function findUser(user) {
     $("#user-result").append(
         '<p>' +
         'Name: ' + user.first_name + '<br>' +
-        'Longitude: '  + user.last_name + '<br>' +
+        'Longitude: ' + user.last_name + '<br>' +
         'Latitude: ' + user.email + '<br>' +
         'Stars: ' + user.gender + '<br>' +
         '<p>'
     );
 
-    
-
 }
-
-
 
 
 function recreateUsersTable(users) {
@@ -80,7 +74,7 @@ function recreateUsersTable(users) {
 
             let tabCell = tr.insertCell(-1);
             if (j == 5) {
-                
+
                 tabCell.style.backgroundImage = `url(${users[i][col[j]]})`
                 continue;
             }
@@ -103,45 +97,16 @@ function userOperationsListeners() {
     });
 
     $("#get-delete-do").click(() => {
-        if ($("#get-delete-do").text() === "Update user") {
             const userId = $("#user-id").val();
+            console.log(userId);
 
             getUserById(userId);
-        } else {
-            // Delete
-        }
-    }
-function $("#show-button").click(() => {
+    });
+
+    $("#show-button").click(() => {
         getAllUsers();
     });
 }
 
 
-// function userOperationsListeners() {
-//     $("#update-button").click(() => {
-//         console.log("hey");
-//         getAllUsers();
-//     });
-// }
-// function userOperationsListeners() {
 
-//     $("#get-button").click(() => {
-//         $("#get-delete-restaurant").css("display", "none");
-//         alert("Add");
-//     });
-
-//     $("#update-button").click(() => {
-//         $("#get-delete-restaurant").css("display", "none");
-//         alert("Update");
-//     });
-
-//     $("#get-delete-do").click(() => {
-//         if ($("#get-delete-do").text() === "Get") {
-//             const restaurantId = $("#rest-id").val();
-
-//             getRestaurantById(restaurantId);
-//         } else {
-//             // Delete
-//         }
-//     });
-// }
