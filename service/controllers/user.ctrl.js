@@ -8,72 +8,70 @@ exports.userDBController = {
 
     getUsers(req, res) {
 
-        if (req.query) {
-            User.find({})
-                .then(docs => { res.json(docs) })
-                .catch(err => console.log(`Error getting the data from DB: ${err}`));
-        }
-
 
         if (req.query.job) {
             User.find({ job: `${req.query.job}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
-            console.log(req.query.job);
 
         }
 
-        if (req.query.gender) {
+        else if (req.query.gender) {
             User.find({ gender: `${req.query.gender}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
 
-        if (req.query.email) {
+        else if (req.query.email) {
             User.find({ email: `${req.query.email}` })
                 .then(docs => { res.json(docs) })
                 .catch(err => console.log(`Error getting the data from DB: ${err}`));
         }
-
-    },
+        
+        else{
+            User.find({})
+                .then(docs => { res.json(docs) })
+                .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    }
+},
 
     getUser(req, res) {
-        User.findOne({ id: parseInt(req.params.id) })
-            .then(docs => { res.json(docs) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    User.findOne({ id: parseInt(req.params.id) })
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
-    },
+},
 
-    addUser(req, res) {
-        ++userID;
-        const newUser = new User({
-            "id": userID,
-            "first_name": req.body.first_name,
-            "last_name": req.body.last_name,
-            "email": req.body.email,
-            "gender": req.body.gender,
-            "avatar": req.body.avatar,
-            "color": req.body.color,
-            "job": req.body.job
-        });
+addUser(req, res) {
+    ++userID;
+    const newUser = new User({
+        "id": userID,
+        "first_name": req.body.first_name,
+        "last_name": req.body.last_name,
+        "email": req.body.email,
+        "gender": req.body.gender,
+        "avatar": req.body.avatar,
+        "color": req.body.color,
+        "job": req.body.job
+    });
 
-        newUser.save()
-            .then(docs => { res.json(docs) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
+    newUser.save()
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
 
-    },
+},
 
-    updatUser(req, res) {
+updatUser(req, res) {
 
-        User.updateOne({ id: parseInt(req.params.id) }, req.body)
-            .then(docs => { res.json(docs) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
-    },
+    User.updateOne({ id: parseInt(req.params.id) }, req.body)
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+},
 
-    deleteUser(req, res) {
-        User.findOneAndDelete({ id: parseInt(req.params.id) })
-            .then(docs => { res.json(docs) })
-            .catch(err => console.log(`Error getting the data from DB: ${err}`));
-    },
+deleteUser(req, res) {
+    User.findOneAndDelete({ id: parseInt(req.params.id) })
+        .then(docs => { res.json(docs) })
+        .catch(err => console.log(`Error getting the data from DB: ${err}`));
+},
 };
 

@@ -30,7 +30,7 @@ const service_url = 'http://localhost:3000/api/users';
 
 
 //CRUD functions, GET & UPDATE
-function getAllUsers() {
+function getAllUsers(query) {
     $.ajax({
         url: service_url,
         type: 'GET',
