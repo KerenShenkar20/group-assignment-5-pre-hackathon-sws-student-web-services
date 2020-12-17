@@ -3,6 +3,7 @@ const User = require('../Models/users');
 
 
 let userID = 500;
+let data;
 exports.userDBController = {
 
     getUsers(req, res) {
@@ -56,15 +57,15 @@ exports.userDBController = {
             "job": req.body.job
         });
 
-        const result = newUser.save()
+        newUser.save()
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
- 
+
     },
 
     updatUser(req, res) {
-        const info = req.body
-        User.updateOne({ id: parseInt(req.params.id) }, info)
+
+        User.updateOne({ id: parseInt(req.params.id) }, req.body)
             .then(docs => { res.json(docs) })
             .catch(err => console.log(`Error getting the data from DB: ${err}`));
     },
