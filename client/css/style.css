@@ -41,13 +41,13 @@ table, th, td
 th {
     font-weight:bold;
 }
-#get-delete-user,
+#get-update-user,
 #add-update-user {
     margin-left: auto;
     margin-right: auto;
 }
 
-#get-delete-user,
+#get-update-user,
 #add-update-user {
     display: none;
 }
