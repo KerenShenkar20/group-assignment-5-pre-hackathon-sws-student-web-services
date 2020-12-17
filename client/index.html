@@ -16,10 +16,21 @@
     <div id="wrapper">
         <h1 class="Jumbotron">Users</h1>
         <section id="content">
-            <section id="buttons" class="d-flex justify-content-center">
+            <section id="buttons" class="d-flex flex-wrap justify-content-center margin-left">
                 <button type="button" class="btn btn-success" id="Hide-button">Hide users</button>
                 <button type="button" class="btn btn-info" id="show-button">Show users</button>
                 <button type="button" class="btn btn-warning" id="update-button">Update user</button>
+                <section id="Filter">
+                    <input list="Filter-list" name="Filter-list" id="query-filter-list" >
+                    <datalist class="nav-item dropdown" id="Filter-list">
+                        <option value="gender">
+                        <option value="email">
+                        <option value="job">
+                    </datalist>
+                    <input type="text" id="query-value" name="query-value"/>
+                    <button type="button" class="btn btn-primary" id="get-query-value">Go</button>
+                </section>
+
             </section>
             <section id="get-update-user">
                 <input type="text" id="user-id" name="user-id"/>

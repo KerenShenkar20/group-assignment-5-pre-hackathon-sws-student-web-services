@@ -12,7 +12,7 @@ const service_url = 'http://localhost:3000/api/users';
         $("#get-update-user").css("display", "block");
         $("#get-update-do").text("Get");
     });
-
+    
     $("#get-update-do").click(() => {
         const userId = $("#user-id").val();
         getUserById(userId);
@@ -20,19 +20,41 @@ const service_url = 'http://localhost:3000/api/users';
 
     //Show button, calling get all users function.
     $("#show-button").click(() => {
+        $("#Filter").css("display", "block");
         getAllUsers();
+        
+    });
+
+    $("#get-query-value").click(() =>{
+        const queryValue = $("#query-value").val();
+        const queryFilter = $("#query-filter-list").val();
+        const query = `?${queryFilter}=${queryValue}`;
+        if(queryFilter == "job" ||queryFilter == "gender" || queryFilter == "email" )
+            getAllUsersFiltered(query);    
+
     });
 
     $("#Hide-button").click(() => {
         $("table").hide();
     });
+
 }())
 
 
 //CRUD functions, GET & UPDATE
-function getAllUsers(query) {
+function getAllUsers() {
     $.ajax({
         url: service_url,
+        type: 'GET',
+        success: function (users) {
+            recreateUsersTable(users);
+        }
+    });
+}
+
+function getAllUsersFiltered(query) {
+    $.ajax({
+        url: service_url + query,
         type: 'GET',
         success: function (users) {
             recreateUsersTable(users);
@@ -51,7 +73,6 @@ function getUserById(userId) {
 }
 
 function updateUserById(userId, info) {
-    console.log(info);
     $.ajax({
         url: service_url + `/${userId}`,
         type: 'PUT',
@@ -79,7 +100,6 @@ function findUser(user) {
 
 // creates a table with all the users, by the following format - all users with all the information about them, ignore the color column - just color the font of the row and show the avatar in the right column.
 function recreateUsersTable(users) {
-
     // EXTRACT VALUE FOR HTML HEADER. 
     let col = [];
     for (let i = 0; i < users.length; i++) {
