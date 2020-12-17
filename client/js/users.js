@@ -2,10 +2,11 @@
 const service_url = 'http://localhost:3000/api/users';
 
 //Self invoke  for the button listeners
-userOperationsListeners();
+;
 
 // logics of the buttons.
-function userOperationsListeners() {
+(function userOperationsListeners() {
+   
     //Update button, display the option to update user.
     $("#update-button").click(() => {
         $("#get-update-user").css("display", "block");
@@ -14,10 +15,9 @@ function userOperationsListeners() {
 
     $("#get-update-do").click(() => {
         const userId = $("#user-id").val();
-        console.log(userId);
-
         getUserById(userId);
     });
+
     //Show button, calling get all users function.
     $("#show-button").click(() => {
         getAllUsers();
@@ -26,7 +26,7 @@ function userOperationsListeners() {
     $("#Hide-button").click(() => {
         $("table").hide();
     });
-}
+}())
 
 
 //CRUD functions, GET & UPDATE
