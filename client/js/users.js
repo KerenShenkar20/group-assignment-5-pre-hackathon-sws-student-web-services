@@ -51,10 +51,11 @@ function getUserById(userId) {
 }
 
 function updateUserById(userId, info) {
+    console.log(info);
     $.ajax({
         url: service_url + `/${userId}`,
         type: 'PUT',
-        data : info
+        data: info
     });
 }
 
@@ -63,34 +64,42 @@ function findUser(user) {
     $("#user-result").append(
         `<input type="text" placeholder="key" id="key">` +
         `<input type="text" placeholder="value" id="value">` +
-        '<button type="button" class="btn-danger" id="updateFisrtName">Enter</button><br>'
+        '<button type="button" class="btn-danger" id="updateKey">Enter</button><br>'
     );
 
-        $("#updateFisrtName").click(() => {
-            let data = {};
-            const key = document.getElementById("key").value;
-            const value = document.getElementById("value").value;
-            data[key] = value;
-            console.log(data);
-            updateUserById(user.id, data);
-        });
+    $("#updateKey").click(() => {
+        let data = {};
+        const key = document.getElementById("key").value;
+        const value = document.getElementById("value").value;
+        data[key] = value;
+        console.log(user);
+        updateUserById(user.id, data);
+    });
 }
 
 // creates a table with all the users, by the following format - all users with all the information about them, ignore the color column - just color the font of the row and show the avatar in the right column.
 function recreateUsersTable(users) {
+
     // EXTRACT VALUE FOR HTML HEADER. 
     let col = [];
     for (let i = 0; i < users.length; i++) {
         for (let key in users[i]) {
             if (col.indexOf(key) === -1) {
+
                 col.push(key);
             }
         }
     }
+
+    col.splice(9, 1);
+    col.splice(0, 1);
+
     // CREATE DYNAMIC TABLE.
     let table = document.createElement("table");
+
     // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
     let tr = table.insertRow(-1);// TABLE ROW.
+    console.log(tr);
 
     for (let i = 0; i < col.length; i++) {
         if (i == 6)
@@ -104,13 +113,14 @@ function recreateUsersTable(users) {
     for (let i = 0; i < users.length; i++) {
         tr = table.insertRow(-1);
         //each user gets colored font accordingly to his color, hides the col of the color.
-        tr.style.color = users[i][col[7]];
+        tr.style.color = users[i]['color'];
+
         for (let j = 0; j < col.length; j++) {
-            if (j == 5)
+            if (j == 6)
                 continue;
 
             let tabCell = tr.insertCell(-1);
-            if (j == 6) {
+            if (j == 5) {
                 //Showing avatar as backgroundimage in the table cell
                 tabCell.style.backgroundImage = `url(${users[i][col[j]]})`
                 continue;
