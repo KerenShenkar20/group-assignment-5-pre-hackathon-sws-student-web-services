@@ -1,9 +1,10 @@
 
+const service_url = 'http://localhost:3000/api/users';
 userOperationsListeners();
 
 function getAllUsers() {
     $.ajax({
-        url: 'http://localhost:3000/api/users',
+        url: service_url,
         type: 'GET',
         success: function (users) {
             recreateUsersTable(users);
@@ -13,7 +14,7 @@ function getAllUsers() {
 
 function getUserById(userId) {
     $.ajax({
-        url: `http://localhost:3000/api/users/${userId}`,
+        url: service_url + `/${userId}`,
         type: 'GET',
         success: function (user) {
             findUser(user);
@@ -21,24 +22,22 @@ function getUserById(userId) {
     });
 }
 
-function updateUserById(userId) {
-    console.log(userId);
+function updateUserById(userId, info) {
+    console.log(userId,info);
     $.ajax({
         url: `http://localhost:3000/api/users/${userId}`,
         type: 'PUT',
-        success: function (user) {
-            findUser(user);
-        }
+        data : JSON.stringify(info),
+        contentType: "application/json; charset=utf-8"
     });
 }
 
 function findUser(user) {
-    console.log(user.gender);
     $("#user-result").empty();
     $("#user-result").append(
         `First Name <input type="text" placeholder="${user.first_name}" id="firstName">` +
         '<button type="button" class="btn-danger" id="updateFisrtName">Enter</button><br>' +
-        `Last Name <input type="text" placeholder="${user.last_name}">` +
+        `Last Name <input type="text" placeholder="${user.last_name}" id="lastName">` +
         '<button type="button" class="btn-danger" id="updateLastName">Enter</button><br>' +
         `Email <input type="text" placeholder="${user.email}">` +
         '<button type="button" class="btn-danger" id="updateEmail">Enter</button><br>' +
@@ -46,14 +45,12 @@ function findUser(user) {
         '<button type="button" class="btn-danger" id="updateGender">Enter</button><br>'
     );
 
-    $(document).ready(() => {
         $("#updateFisrtName").click(() => {
             const firstName = document.getElementById("firstName").value;
-            console.log("caught the right button and reutned: ", firstName);
-        });
-        //updateUserById(user);
-    });
+            const lastName = document.getElementById("lastName").value;
 
+            updateUserById(user, firstName);
+        });
 
 }
 
