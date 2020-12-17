@@ -1,5 +1,7 @@
 
 const service_url = 'http://localhost:3000/api/users';
+let data = {};
+
 userOperationsListeners();
 
 function getAllUsers() {
@@ -23,12 +25,11 @@ function getUserById(userId) {
 }
 
 function updateUserById(userId, info) {
-    console.log(userId,info);
+
     $.ajax({
-        url: `http://localhost:3000/api/users/${userId}`,
+        url: service_url + `/${userId}`,
         type: 'PUT',
-        data : JSON.stringify(info),
-        contentType: "application/json; charset=utf-8"
+        data : info
     });
 }
 
@@ -48,8 +49,9 @@ function findUser(user) {
         $("#updateFisrtName").click(() => {
             const firstName = document.getElementById("firstName").value;
             const lastName = document.getElementById("lastName").value;
-
-            updateUserById(user, firstName);
+            
+            data = {"first_name" : firstName};
+            updateUserById(user.id, data);
         });
 
 }
